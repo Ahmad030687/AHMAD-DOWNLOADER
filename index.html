@@ -3,264 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMAD ALI - Ultimate Premium Hub</title>
+    <title>AHMAD ALI - Premium Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --black: #000000;
-            --card-bg: #080808;
-            --gold: #D4AF37;
-            --bright-gold: #FFD700;
-            --white: #ffffff;
-            --border: rgba(212, 175, 55, 0.3);
+            --black: #000; --gold: #D4AF37; --bright: #FFD700; --border: rgba(212, 175, 55, 0.3);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: var(--black); color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-image: radial-gradient(circle at top right, #1a1500, #000); }
+        
+        .top-nav { width: 100%; padding: 15px; text-align: center; border-bottom: 2px solid var(--gold); color: var(--gold); font-weight: 800; letter-spacing: 5px; font-size: 12px; }
+        .app-container { width: 92%; max-width: 600px; padding-top: 30px; text-align: center; }
+        .app-logo { font-size: 3rem; font-weight: 800; margin-bottom: 5px; background: linear-gradient(to right, #fff, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
+        
+        .search-wrapper { background: #111; border: 2px solid var(--gold); border-radius: 50px; display: flex; padding: 5px; margin: 25px 0; }
+        .search-wrapper input { flex: 1; background: transparent; border: none; outline: none; color: white; padding: 0 20px; font-size: 1rem; }
+        .btn-extract { background: linear-gradient(45deg, var(--gold), var(--bright)); color: black; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; }
 
-        body {
-            background-color: var(--black);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: radial-gradient(circle at top right, #1a1500, #000);
-        }
-
-        /* Top Bar */
-        .top-nav {
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            background: rgba(0,0,0,0.8);
-            border-bottom: 2px solid var(--gold);
-            color: var(--gold);
-            font-weight: 800;
-            letter-spacing: 5px;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .app-container {
-            width: 92%;
-            max-width: 650px;
-            padding-top: 40px;
-            text-align: center;
-        }
-
-        .app-logo {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            background: linear-gradient(to right, #fff, var(--gold), #fff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
-        }
-
-        .search-wrapper {
-            background: #111;
-            border: 2px solid var(--gold);
-            border-radius: 50px;
-            display: flex;
-            padding: 6px;
-            margin: 30px 0;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
-        }
-
-        .search-wrapper input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 0 20px;
-            font-size: 1rem;
-        }
-
-        .btn-extract {
-            background: linear-gradient(45deg, var(--gold), var(--bright-gold));
-            color: black;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-extract:active { transform: scale(0.9); }
-
-        /* Loader */
-        .loader {
-            display: none;
-            margin: 20px auto;
-            border: 4px solid #222;
-            border-top: 4px solid var(--gold);
-            border-radius: 50%;
-            width: 50px; height: 50px;
-            animation: spin 1s linear infinite;
-        }
+        .loader { display: none; margin: 20px auto; border: 4px solid #222; border-top: 4px solid var(--gold); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Result Card */
-        #download-card {
-            background: var(--card-bg);
-            border-radius: 30px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            display: none;
-            animation: fadeIn 0.6s ease-out;
-            margin-bottom: 50px;
-        }
+        #download-card { background: #080808; border-radius: 25px; border: 1px solid var(--border); overflow: hidden; display: none; animation: fadeIn 0.5s; margin-bottom: 50px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #video-thumb { width: 100%; border-bottom: 3px solid var(--gold); }
+        .video-meta { padding: 15px; color: var(--gold); font-size: 1rem; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .button-hub { display: grid; grid-template-columns: 1fr auto 1fr; padding: 20px; background: #050505; align-items: center; }
+        .separation-line { width: 2px; height: 200px; background: white; box-shadow: 0 0 8px white; margin: 0 10px; }
+        
+        .hub-col { display: flex; flex-direction: column; gap: 10px; }
+        .col-tag { font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; font-weight: 800; color: #fff; }
 
-        #video-thumb { 
-            width: 100%; 
-            border-bottom: 3px solid var(--gold);
-            display: block; 
-        }
-
-        .video-meta { padding: 20px; background: #000; }
-        #v-title { color: var(--gold); font-size: 1.1rem; font-weight: 500; }
-
-        /* SEPARATION GRID */
-        .button-hub {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            padding: 25px 15px;
-            background: #050505;
-            align-items: center;
-        }
-
-        .separation-line {
-            width: 2px;
-            height: 180px;
-            background: var(--white);
-            box-shadow: 0 0 10px var(--white);
-            margin: 0 10px;
-        }
-
-        .hub-col { display: flex; flex-direction: column; gap: 12px; }
-        .col-tag { 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            margin-bottom: 10px; 
-            font-weight: 800;
-        }
-
-        /* Quality Buttons */
-        .dl-action-btn {
-            text-decoration: none;
-            padding: 14px 8px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border: 1px solid var(--border);
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .btn-v { color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+        .dl-btn { text-decoration: none; padding: 12px 5px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid var(--border); transition: 0.3s; cursor: pointer; }
+        .btn-v { color: var(--gold); background: rgba(212, 175, 55, 0.1); }
         .btn-v:hover { background: var(--gold); color: black; }
+        .btn-a { color: #fff; background: rgba(255,255,255,0.1); }
+        .btn-a:hover { background: white; color: black; }
 
-        .btn-a { color: var(--white); background: rgba(255, 255, 255, 0.05); border-color: var(--white); }
-        .btn-a:hover { background: var(--white); color: black; }
-
-        /* WhatsApp Button */
-        .wa-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 65px; height: 65px;
-            background: #25d366;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 32px;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-        }
-
-        .footer {
-            margin-top: auto;
-            padding: 30px;
-            text-align: center;
-            color: #444;
-            font-size: 12px;
-            letter-spacing: 4px;
-            width: 100%;
-        }
+        .wa-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 1000; }
+        .footer { padding: 20px; text-align: center; color: #444; font-size: 11px; letter-spacing: 3px; }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">CREATED BY AHMAD ALI</div>
+    <div class="top-nav">OFFICIAL PREMIUM BY AHMAD ALI</div>
 
     <div class="app-container">
         <h1 class="app-logo">AHMAD RDX</h1>
-        <p style="color:#666">Premium All Video & Audio Downloader</p>
-        
         <div class="search-wrapper">
-            <input type="text" id="userInput" placeholder="Paste video link here...">
-            <button class="btn-extract" onclick="fetchData()"><i class="fas fa-bolt"></i></button>
+            <input type="text" id="userInput" placeholder="Paste Video Link Here...">
+            <button class="btn-extract" onclick="fetchData()"><i class="fas fa-download"></i></button>
         </div>
 
         <div class="loader" id="loader"></div>
 
         <div id="download-card">
             <img src="" id="video-thumb">
-            <div class="video-meta">
-                <div id="v-title">Loading Title...</div>
-            </div>
+            <div class="video-meta" id="v-title">Video Title</div>
 
             <div class="button-hub">
                 <div class="hub-col">
-                    <div class="col-tag" style="color:var(--gold)">MP4 VIDEO</div>
-                    <div onclick="startDownload('1080p')" class="dl-action-btn btn-v"><i class="fas fa-crown"></i> 1080p HD</div>
-                    <div onclick="startDownload('720p')" class="dl-action-btn btn-v"><i class="fas fa-video"></i> 720p</div>
-                    <div onclick="startDownload('480p')" class="dl-action-btn btn-v"><i class="fas fa-play"></i> 480p</div>
-                    <div onclick="startDownload('360p')" class="dl-action-btn btn-v"><i class="fas fa-mobile"></i> 360p</div>
-                    <div onclick="startDownload('144p')" class="dl-action-btn btn-v"><i class="fas fa-bolt"></i> 144p</div>
+                    <div class="col-tag">VIDEO MP4</div>
+                    <button onclick="forceDownload('1080p')" class="dl-btn btn-v">1080p HD</button>
+                    <button onclick="forceDownload('720p')" class="dl-btn btn-v">720p HD</button>
+                    <button onclick="forceDownload('480p')" class="dl-btn btn-v">480p SD</button>
+                    <button onclick="forceDownload('360p')" class="dl-btn btn-v">360p Low</button>
                 </div>
 
                 <div class="separation-line"></div>
 
                 <div class="hub-col">
-                    <div class="col-tag" style="color:white">MP3 AUDIO</div>
-                    <div onclick="startDownload('mp3')" class="dl-action-btn btn-a"><i class="fas fa-music"></i> Audio HQ</div>
-                    <div onclick="startDownload('mp3')" class="dl-action-btn btn-a"><i class="fas fa-headphones"></i> Music</div>
-                    <div onclick="startDownload('mp3')" class="dl-action-btn btn-a"><i class="fas fa-bolt"></i> Fast MP3</div>
+                    <div class="col-tag">AUDIO MP3</div>
+                    <button onclick="forceDownload('mp3')" class="dl-btn btn-a">Download MP3</button>
+                    <button onclick="copyLink()" class="dl-btn btn-a">Copy Link</button>
                 </div>
             </div>
+            <p style="font-size: 10px; color: #666; padding: 10px;">Note: If download fails, use 'Copy Link' and paste in browser.</p>
         </div>
     </div>
 
     <a href="https://wa.me/923068796622" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
     <div class="footer">DEVELOPED BY <span style="color:var(--gold)">AHMAD ALI</span></div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        let videoStore = { mp4: '', mp3: '', title: '' };
+        let currentLinks = { mp4: '', mp3: '', title: '' };
 
         async function fetchData() {
             const url = document.getElementById('userInput').value;
-            const card = document.getElementById('download-card');
             const loader = document.getElementById('loader');
+            const card = document.getElementById('download-card');
 
-            if (!url) return alert("Bhai, link toh dalo!");
+            if (!url) return alert("Link paste karein bhai!");
 
-            card.style.display = 'none';
             loader.style.display = 'block';
+            card.style.display = 'none';
 
             try {
                 let api = "";
@@ -273,63 +112,56 @@
                 }
 
                 const res = await axios.get(api);
-                const data = res.data;
+                const r = res.data.result;
 
                 if (url.includes('youtube')) {
-                    videoStore.mp4 = data.result.mp4;
-                    videoStore.mp3 = data.result.mp3;
-                    videoStore.title = data.result.title;
+                    currentLinks.mp4 = r.mp4;
+                    currentLinks.mp3 = r.mp3;
+                    currentLinks.title = r.title;
                     document.getElementById('video-thumb').src = `https://img.youtube.com/vi/${url.split('v=')[1]?.split('&')[0] || url.split('/').pop()}/hqdefault.jpg`;
                 } else if (url.includes('instagram')) {
-                    videoStore.mp4 = data.result.download_url;
-                    videoStore.mp3 = data.result.download_url; // No separate audio for IG usually
-                    videoStore.title = "Instagram Video";
-                    document.getElementById('video-thumb').src = data.result.thumbnail;
+                    currentLinks.mp4 = r.download_url;
+                    currentLinks.mp3 = r.download_url;
+                    currentLinks.title = "Instagram Video";
+                    document.getElementById('video-thumb').src = r.thumbnail;
                 } else {
-                    const r = data.result;
-                    videoStore.mp4 = r.links.video[0].url;
-                    videoStore.mp3 = r.links.video[0].url;
-                    videoStore.title = r.title || "Social Video";
+                    currentLinks.mp4 = r.links.video[0].url;
+                    currentLinks.mp3 = r.links.video[0].url;
+                    currentLinks.title = r.title || "Social Video";
                     document.getElementById('video-thumb').src = r.thumbnail;
                 }
 
-                document.getElementById('v-title').innerText = videoStore.title;
+                document.getElementById('v-title').innerText = currentLinks.title;
                 loader.style.display = 'none';
                 card.style.display = 'block';
 
             } catch (e) {
                 loader.style.display = 'none';
-                alert("API Error! Please check link or try again.");
+                alert("API Error: Link expired ya block ho gaya hai.");
             }
         }
 
-        // --- THE FIXED DOWNLOAD LOGIC ---
-        async function startDownload(quality) {
-            const fileUrl = quality === 'mp3' ? videoStore.mp3 : videoStore.mp4;
-            const fileName = `AHMAD_RDX_${quality}.mp4`;
+        function forceDownload(q) {
+            const link = q === 'mp3' ? currentLinks.mp3 : currentLinks.mp4;
+            
+            // Sabse behtar tareeka: Invisible anchor with rel=noreferrer
+            const a = document.createElement('a');
+            a.href = link;
+            a.target = "_blank";
+            a.rel = "noreferrer"; 
+            a.setAttribute("download", `AhmadRDX_${q}.mp4`);
+            
+            // Kuch browsers mein click force karne ke liye
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
 
-            alert("📥 Download start ho raha hai... Agar page khul jaye toh video par 'Long Press' karke 'Save Video' karein.");
+            alert("📥 Download start ho raha hai! Agar naya page khule, toh video par 'Long Press' kar ke 'Save' kar lein.");
+        }
 
-            // Trick 1: Attempt to use Blob (Might fail due to CORS)
-            try {
-                const response = await fetch(fileUrl);
-                const blob = await response.blob();
-                const blobUrl = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = blobUrl;
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(blobUrl);
-            } catch (e) {
-                // Trick 2: Fallback - Open in new tab with instructions
-                const link = document.createElement('a');
-                link.href = fileUrl;
-                link.target = "_blank";
-                link.setAttribute("download", fileName);
-                link.click();
-            }
+        function copyLink() {
+            navigator.clipboard.writeText(currentLinks.mp4);
+            alert("Link Copied! Ab ise kisi bhi downloader ya browser mein paste karein.");
         }
     </script>
 </body>
