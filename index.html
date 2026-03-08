@@ -1,168 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHMAD ALI - Premium Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AHMAD DATABASE - FULL EDITION</title>
+
+<style>
+/* THEME VARIABLES */
+:root {
+    --bg-color: #0a0a0c;
+    --card-bg: #121214;
+    --text-color: #ffffff;
+    --input-bg: #1a1a1d;
     
-    <style>
-        :root {
-            --black: #000; --gold: #D4AF37; --bright: #FFD700; --border: rgba(212, 175, 55, 0.3);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
-        body { background: var(--black); color: white; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-image: radial-gradient(circle at top right, #1a1500, #000); }
-        
-        .top-nav { width: 100%; padding: 15px; text-align: center; border-bottom: 2px solid var(--gold); color: var(--gold); font-weight: 800; letter-spacing: 5px; font-size: 12px; }
-        .app-container { width: 92%; max-width: 600px; padding-top: 30px; text-align: center; }
-        .app-logo { font-size: 3rem; font-weight: 800; margin-bottom: 5px; background: linear-gradient(to right, #fff, var(--gold), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
-        
-        .search-wrapper { background: #111; border: 2px solid var(--gold); border-radius: 50px; display: flex; padding: 5px; margin: 25px 0; }
-        .search-wrapper input { flex: 1; background: transparent; border: none; outline: none; color: white; padding: 0 20px; font-size: 1rem; }
-        .btn-extract { background: linear-gradient(45deg, var(--gold), var(--bright)); color: black; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; }
+    /* Default Shade (Purple) */
+    --primary-color: #9c27b0;
+    --accent-color: #d1c4e9;
+    --outline-color: #311b92;
+}
 
-        .loader { display: none; margin: 20px auto; border: 4px solid #222; border-top: 4px solid var(--gold); border-radius: 50%; width: 45px; height: 45px; animation: spin 1s linear infinite; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+/* 10 COLOR SHADES DEFINITIONS */
+[data-shade="0"] { --primary-color: #9c27b0; --accent-color: #d1c4e9; --outline-color: #311b92; } /* Purple */
+[data-shade="1"] { --primary-color: #e53935; --accent-color: #ffcdd2; --outline-color: #b71c1c; } /* Red */
+[data-shade="2"] { --primary-color: #ffb300; --accent-color: #ffecb3; --outline-color: #ff8f00; } /* Gold */
+[data-shade="3"] { --primary-color: #43a047; --accent-color: #c8e6c9; --outline-color: #1b5e20; } /* Green */
+[data-shade="4"] { --primary-color: #1e88e5; --accent-color: #bbdefb; --outline-color: #0d47a1; } /* Blue */
+[data-shade="5"] { --primary-color: #d81b60; --accent-color: #f8bbd0; --outline-color: #880e4f; } /* Pink */
+[data-shade="6"] { --primary-color: #00acc1; --accent-color: #b2ebf2; --outline-color: #006064; } /* Cyan */
+[data-shade="7"] { --primary-color: #ff5722; --accent-color: #ffccbc; --outline-color: #e64a19; } /* Orange */
+[data-shade="8"] { --primary-color: #795548; --accent-color: #d7ccc8; --outline-color: #4e342e; } /* Brown */
+[data-shade="9"] { --primary-color: #607d8b; --accent-color: #cfd8dc; --outline-color: #37474f; } /* Grey */
 
-        #download-card { background: #080808; border-radius: 25px; border: 1px solid var(--border); overflow: hidden; display: none; animation: fadeIn 0.5s; margin-bottom: 50px; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        #video-thumb { width: 100%; border-bottom: 3px solid var(--gold); }
-        .video-meta { padding: 15px; color: var(--gold); font-size: 1rem; }
+/* MULTI-COLOUR RGB ANIMATION */
+[data-shade="multi"] {
+    --primary-color: #9c27b0; 
+    --accent-color: #ffffff;
+    --outline-color: #444;
+}
+[data-shade="multi"] .brand-title, 
+[data-shade="multi"] .result-header,
+[data-shade="multi"] .search-btn,
+[data-shade="multi"] .header-img,
+[data-shade="multi"] .wa-main-btn {
+    animation: rgbAnim 6s infinite linear;
+}
 
-        .button-hub { display: grid; grid-template-columns: 1fr auto 1fr; padding: 20px; background: #050505; align-items: center; }
-        .separation-line { width: 2px; height: 200px; background: white; box-shadow: 0 0 8px white; margin: 0 10px; }
-        
-        .hub-col { display: flex; flex-direction: column; gap: 10px; }
-        .col-tag { font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; font-weight: 800; color: #fff; }
+@keyframes rgbAnim {
+    0% { background: #ff0000; border-color: #ff0000; color: white; box-shadow: 0 0 15px #ff0000; }
+    25% { background: #ffff00; border-color: #ffff00; box-shadow: 0 0 15px #ffff00; }
+    50% { background: #00ff00; border-color: #00ff00; box-shadow: 0 0 15px #00ff00; }
+    75% { background: #0000ff; border-color: #0000ff; box-shadow: 0 0 15px #0000ff; }
+    100% { background: #ff0000; border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+}
 
-        .dl-btn { text-decoration: none; padding: 12px 5px; border-radius: 12px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid var(--border); transition: 0.3s; cursor: pointer; }
-        .btn-v { color: var(--gold); background: rgba(212, 175, 55, 0.1); }
-        .btn-v:hover { background: var(--gold); color: black; }
-        .btn-a { color: #fff; background: rgba(255,255,255,0.1); }
-        .btn-a:hover { background: white; color: black; }
+*{box-sizing:border-box;margin:0;padding:0;font-family: 'Segoe UI', sans-serif; transition: all 0.4s ease;}
 
-        .wa-btn { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 1000; }
-        .footer { padding: 20px; text-align: center; color: #444; font-size: 11px; letter-spacing: 3px; }
-    </style>
+body{
+    background: var(--bg-color);
+    color: var(--text-color);
+    background-image: radial-gradient(circle at 50% 50%, #16161a 0%, #0a0a0c 100%);
+    min-height: 100vh;
+}
+
+.app{
+    max-width:520px;
+    margin:auto;
+    padding:15px;
+    position: relative;
+}
+
+/* THEME SYSTEM */
+.theme-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2000;
+}
+
+.theme-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+}
+
+.theme-bar {
+    display: none;
+    background: var(--card-bg);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    margin-top: 8px;
+    padding: 10px;
+    width: 160px;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.theme-bar.active { display: flex; }
+
+.shade-bar {
+    width: 100%; height: 32px;
+    border-radius: 5px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: bold; color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* HEADER SECTION */
+.header-container { text-align: center; margin-bottom: 30px; padding-top: 50px; }
+.header-img {
+    width: 130px; height: 130px; border-radius: 12px;
+    object-fit: cover; border: 3px solid var(--primary-color);
+    box-shadow: 0 0 25px var(--primary-color);
+    display: block; margin: 0 auto 15px auto;
+}
+.brand-title { font-weight: 900; font-size: 28px; color: var(--primary-color); text-transform: uppercase; letter-spacing: 4px; }
+
+/* SEARCH SECTION */
+.searchbox{ background: var(--card-bg); padding: 30px; border-radius: 18px; border: 1px solid var(--outline-color); }
+input{ width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #333; background: var(--input-bg); color: white; font-size: 16px; margin-bottom: 15px; text-align: center; outline: none; }
+input:focus { border-color: var(--primary-color); }
+button.search-btn{ width: 100%; padding: 15px; border: none; border-radius: 12px; background: var(--primary-color); color: white; font-weight: 800; font-size: 16px; cursor: pointer; text-transform: uppercase; }
+
+/* WHATSAPP FLOATING MENU (4 BUTTONS) */
+.wa-float { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+.wa-main-btn {
+    background: var(--primary-color); width: 60px; height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 15px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+.wa-icon { width: 35px; height: 35px; fill: white; }
+.wa-menu {
+    position: absolute; bottom: 75px; right: 0; background: var(--card-bg);
+    border: 1px solid var(--primary-color); border-radius: 15px;
+    width: 220px; padding: 12px; display: none; flex-direction: column; gap: 10px;
+}
+.wa-menu.active { display: flex; }
+.wa-link { text-decoration: none; color: white; background: #1e1e21; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: bold; text-align: center; border: 1px solid transparent; }
+.wa-link:hover { border-color: var(--primary-color); }
+
+/* RESULTS & MAP */
+.result-page{ background: var(--card-bg); border-radius: 18px; overflow: hidden; margin-top: 25px; border: 1px solid var(--outline-color); }
+.result-header{ background: var(--primary-color); color: white; padding: 15px; font-weight: 800; text-align: center; }
+.result-table{ width: 100%; border-collapse: collapse; }
+.result-table td{ border-bottom: 1px solid #222; padding: 15px; font-size: 14px; }
+.result-table td:first-child{ font-weight: bold; color: var(--accent-color); width: 35%; text-transform: uppercase; font-size: 11px; }
+
+.map-container { padding: 15px; background: #000; }
+.map-frame {
+    width: 100%; height: 200px;
+    border: 1px solid #333; border-radius: 12px;
+    margin-bottom: 12px;
+}
+.action-buttons { display: flex; gap: 10px; flex-direction: column; }
+.view-map-btn, .copy-map-btn {
+    display: block; width: 100%;
+    text-align: center;
+    padding: 12px; text-decoration: none;
+    font-weight: bold; border-radius: 10px;
+    font-size: 12px; cursor: pointer; border: none;
+}
+.view-map-btn { background: var(--outline-color); color: white; }
+.copy-map-btn { background: #333; color: #00ff00; border: 1px solid #444; }
+
+.loader { display: none; text-align: center; margin-top: 20px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
 </head>
-<body>
 
-    <div class="top-nav">OFFICIAL PREMIUM BY AHMAD ALI</div>
+<body data-shade="0">
 
-    <div class="app-container">
-        <h1 class="app-logo">AHMAD RDX</h1>
-        <div class="search-wrapper">
-            <input type="text" id="userInput" placeholder="Paste Video Link Here...">
-            <button class="btn-extract" onclick="fetchData()"><i class="fas fa-download"></i></button>
-        </div>
-
-        <div class="loader" id="loader"></div>
-
-        <div id="download-card">
-            <img src="" id="video-thumb">
-            <div class="video-meta" id="v-title">Video Title</div>
-
-            <div class="button-hub">
-                <div class="hub-col">
-                    <div class="col-tag">VIDEO MP4</div>
-                    <button onclick="forceDownload('1080p')" class="dl-btn btn-v">1080p HD</button>
-                    <button onclick="forceDownload('720p')" class="dl-btn btn-v">720p HD</button>
-                    <button onclick="forceDownload('480p')" class="dl-btn btn-v">480p SD</button>
-                    <button onclick="forceDownload('360p')" class="dl-btn btn-v">360p Low</button>
-                </div>
-
-                <div class="separation-line"></div>
-
-                <div class="hub-col">
-                    <div class="col-tag">AUDIO MP3</div>
-                    <button onclick="forceDownload('mp3')" class="dl-btn btn-a">Download MP3</button>
-                    <button onclick="copyLink()" class="dl-btn btn-a">Copy Link</button>
-                </div>
-            </div>
-            <p style="font-size: 10px; color: #666; padding: 10px;">Note: If download fails, use 'Copy Link' and paste in browser.</p>
+<div class="app" id="mainApp">
+    <div class="theme-container">
+        <button class="theme-btn" onclick="toggleThemeBar()">ðŸŽ¨ THEME</button>
+        <div class="theme-bar" id="themeBar">
+            <div class="shade-bar" style="background:#9c27b0" onclick="setShade('0')">PURPLE</div>
+            <div class="shade-bar" style="background:#e53935" onclick="setShade('1')">RED</div>
+            <div class="shade-bar" style="background:#ffb300" onclick="setShade('2')">GOLD</div>
+            <div class="shade-bar" style="background:#43a047" onclick="setShade('3')">GREEN</div>
+            <div class="shade-bar" style="background:#1e88e5" onclick="setShade('4')">BLUE</div>
+            <div class="shade-bar" style="background:#d81b60" onclick="setShade('5')">PINK</div>
+            <div class="shade-bar" style="background:#00acc1" onclick="setShade('6')">CYAN</div>
+            <div class="shade-bar" style="background:#ff5722" onclick="setShade('7')">ORANGE</div>
+            <div class="shade-bar" style="background:#795548" onclick="setShade('8')">BROWN</div>
+            <div class="shade-bar" style="background:#607d8b" onclick="setShade('9')">GREY</div>
+            <div class="shade-bar" style="background: linear-gradient(45deg, red, blue, green); border:1px solid #fff" onclick="setShade('multi')">MULTI RGB</div>
         </div>
     </div>
 
-    <a href="https://wa.me/923068796622" class="wa-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <div class="footer">DEVELOPED BY <span style="color:var(--gold)">AHMAD ALI</span></div>
+    <div class="header-container">
+        <img src="https://i.postimg.cc/W3R683W7/1758883016572.png" alt="Logo" class="header-img">
+        <div class="brand-title">AHMAD HACKER DATABASE</div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        let currentLinks = { mp4: '', mp3: '', title: '' };
+    <div class="searchbox">
+        <label style="font-size:11px; color:var(--accent-color); font-weight:bold; margin-bottom:10px; display:block;">MOBILE NUMBER</label>
+        <input id="phoneInput" type="text" placeholder="03XXXXXXXXX" maxlength="11">
+        <button class="search-btn" onclick="executeSearch()">SEARCH DATABASE</button>
+    </div>
 
-        async function fetchData() {
-            const url = document.getElementById('userInput').value;
-            const loader = document.getElementById('loader');
-            const card = document.getElementById('download-card');
+    <div class="loader" id="loader">
+        <div style="width:40px;height:40px;border:4px solid #333;border-top:4px solid var(--primary-color);border-radius:50%;animation:spin .8s linear infinite;margin:auto;"></div>
+    </div>
 
-            if (!url) return alert("Link paste karein bhai!");
+    <div id="status" style="text-align:center; margin-top:15px; color:var(--primary-color); font-weight:bold;"></div>
+    <div id="results"></div>
+</div>
 
-            loader.style.display = 'block';
-            card.style.display = 'none';
+<div class="wa-float" id="waFloat">
+    <div class="wa-menu" id="waMenu">
+        <a href="https://whatsapp.com/channel/03068796622" target="_blank" class="wa-link">Official Channel</a>
+        <a href="https://chat.whatsapp.com/03068796622?mode=gi_t" target="_blank" class="wa-link">Official Group</a>
+        <a href="https://chat.whatsapp.com/03068796622?mode=hqctcla" target="_blank" class="wa-link">Official Helping Group</a>
+        <a href="https://api.whatsapp.com/send?phone=+923068796622&text=%3E+*As-Salamu+Alaykum+AHMAD*" target="_blank" class="wa-link" style="background:var(--primary-color)">CONTACT OWNER</a>
+    </div>
+    <div class="wa-main-btn" onclick="toggleWAMenu()">
+        <svg class="wa-icon" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.4-8.6-44.6-27.5-16.5-14.7-27.6-32.8-30.8-38.4-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.5-9.3 1.9-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </div>
+</div>
 
-            try {
-                let api = "";
-                if (url.includes('youtube') || url.includes('youtu.be')) {
-                    api = `https://raza-api-taupe.vercel.app/download/ytdl?url=${encodeURIComponent(url)}`;
-                } else if (url.includes('instagram.com')) {
-                    api = `https://api.princetechn.com/api/download/instadl?apikey=prince&url=${encodeURIComponent(url)}`;
-                } else {
-                    api = `https://ahmad-rdx-api-7x1p.onrender.com/downloader/aiodl?apikey=AhmadRDX&url=${encodeURIComponent(url)}`;
-                }
+<script>
+function toggleThemeBar() {
+    document.getElementById("themeBar").classList.toggle("active");
+}
 
-                const res = await axios.get(api);
-                const r = res.data.result;
+function setShade(shade) {
+    document.body.setAttribute("data-shade", shade);
+    document.getElementById("themeBar").classList.remove("active");
+}
 
-                if (url.includes('youtube')) {
-                    currentLinks.mp4 = r.mp4;
-                    currentLinks.mp3 = r.mp3;
-                    currentLinks.title = r.title;
-                    document.getElementById('video-thumb').src = `https://img.youtube.com/vi/${url.split('v=')[1]?.split('&')[0] || url.split('/').pop()}/hqdefault.jpg`;
-                } else if (url.includes('instagram')) {
-                    currentLinks.mp4 = r.download_url;
-                    currentLinks.mp3 = r.download_url;
-                    currentLinks.title = "Instagram Video";
-                    document.getElementById('video-thumb').src = r.thumbnail;
-                } else {
-                    currentLinks.mp4 = r.links.video[0].url;
-                    currentLinks.mp3 = r.links.video[0].url;
-                    currentLinks.title = r.title || "Social Video";
-                    document.getElementById('video-thumb').src = r.thumbnail;
-                }
+function toggleWAMenu() {
+    document.getElementById("waMenu").classList.toggle("active");
+}
 
-                document.getElementById('v-title').innerText = currentLinks.title;
-                loader.style.display = 'none';
-                card.style.display = 'block';
+const API = "https://howler-database-api.vercel.app/api/lookup?phone=";
 
-            } catch (e) {
-                loader.style.display = 'none';
-                alert("API Error: Link expired ya block ho gaya hai.");
-            }
+async function executeSearch() {
+    const num = document.getElementById("phoneInput").value.trim();
+    const loader = document.getElementById("loader");
+    const results = document.getElementById("results");
+    const status = document.getElementById("status");
+
+    if (num.length < 10) {
+        status.innerText = "Error: Invalid Number";
+        return;
+    }
+
+    results.innerHTML = "";
+    status.innerText = "";
+    loader.style.display = "block";
+
+    try {
+        const res = await fetch(API + num);
+        const data = await res.json();
+        loader.style.display = "none";
+
+        if (!data.success || !data.result || data.result.length === 0) {
+            status.innerText = "No Records Found";
+            return;
         }
+        renderAll(data.result);
+    } catch (e) {
+        loader.style.display = "none";
+        status.innerText = "API Offline";
+    }
+}
 
-        function forceDownload(q) {
-            const link = q === 'mp3' ? currentLinks.mp3 : currentLinks.mp4;
+function copyToClipboard(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = "âœ… COPIED!";
+        setTimeout(() => { btn.innerText = originalText; }, 2000);
+    });
+}
+
+function renderAll(records) {
+    const results = document.getElementById("results");
+    results.innerHTML = "";
+    records.forEach((r, index) => {
+        const address = r.address || "N/A";
+        const encodedAddr = encodeURIComponent(address);
+        const mapEmbedUrl = `https://maps.google.com/maps?q=${encodedAddr}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+        const mapExternalUrl = `https://www.google.com/maps/search/${encodedAddr}`;
+
+        results.innerHTML += `
+        <div class="result-page">
+            <div class="result-header">RECORD #${index + 1}</div>
+            <table class="result-table">
+                <tr><td>NAME</td><td>${r.name || "N/A"}</td></tr>
+                <tr><td>CNIC</td><td>${r.cnic || "N/A"}</td></tr>
+                <tr><td>MOBILE</td><td>${r.mobile || "N/A"}</td></tr>
+                <tr><td>ADDRESS</td><td>${address}</td></tr>
+            </table>
             
-            // Sabse behtar tareeka: Invisible anchor with rel=noreferrer
-            const a = document.createElement('a');
-            a.href = link;
-            a.target = "_blank";
-            a.rel = "noreferrer"; 
-            a.setAttribute("download", `AhmadRDX_${q}.mp4`);
-            
-            // Kuch browsers mein click force karne ke liye
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            ${address !== "N/A" ? `
+            <div class="map-container">
+                <iframe class="map-frame" src="${mapEmbedUrl}" frameborder="0"></iframe>
+                <div class="action-buttons">
+                    <a href="${mapExternalUrl}" target="_blank" class="view-map-btn">ðŸ“ OPEN IN GOOGLE MAPS</a>
+                    <button class="copy-map-btn" onclick="copyToClipboard('${mapExternalUrl}', this)">ðŸ”— COPY MAP LINK</button>
+                </div>
+            </div>` : ''}
 
-            alert("📥 Download start ho raha hai! Agar naya page khule, toh video par 'Long Press' kar ke 'Save' kar lein.");
-        }
+            <div style="padding:15px; text-align:center;">
+                <button style="background:#222; color:white; border:1px solid #444; padding:8px 20px; border-radius:8px; cursor:pointer;" onclick="resetSearch()">NEW SEARCH</button>
+            </div>
+        </div>`;
+    });
+}
 
-        function copyLink() {
-            navigator.clipboard.writeText(currentLinks.mp4);
-            alert("Link Copied! Ab ise kisi bhi downloader ya browser mein paste karein.");
-        }
-    </script>
+function resetSearch() {
+    document.getElementById("phoneInput").value = "";
+    document.getElementById("results").innerHTML = "";
+    document.getElementById("status").innerText = "";
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.theme-container')) {
+        document.getElementById("themeBar").classList.remove("active");
+    }
+    if (!event.target.closest('.wa-float')) {
+        document.getElementById("waMenu").classList.remove("active");
+    }
+}
+</script>
+
 </body>
 </html>
